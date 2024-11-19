@@ -40,14 +40,15 @@ export default function Login() {
             <div className="grow-[0.5] max-w-[450px] h-[100dvh] xs:hidden lg:block">
                 <img src={loginBg} className="w-full h-full" />
             </div>
-            <div className="space-y-8 grow shrink-0 flex flex-col items-center justify-center h-[100dvh]" >
+            <div className="space-y-8 grow shrink flex flex-col items-center justify-center h-[100dvh]" >
                 <div>
                     <img src={logo} className="w-28" />
                 </div>
                 <p>Simplifying Loans, Strengthening Growth</p>
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 shrink flex flex-col items-center p-8 bg-[#DEF5F9] rounded-lg">
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 shrink flex flex-col items-center p-8 bg-[#DEF5F9] rounded-lg w-[min(400px,90%)]">
                         <p className="font-bold">Login to your account</p>
+                        <div className="w-full space-y-8 ">
                         <FormField
                             control={form.control}
                             name="username"
@@ -61,6 +62,7 @@ export default function Login() {
                                 </FormItem>
                             )}
                         />
+
                         <FormField
                             control={form.control}
                             name="password"
@@ -74,6 +76,7 @@ export default function Login() {
                                 </FormItem>
                             )}
                         />
+                        </div>
                         <Button type="submit" className="w-full">Login</Button>
                     </form>
                 </Form>
