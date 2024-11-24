@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input"
 import loginBg from "../assets/loginBg.png"
 import logo from "../assets/logo.png"
+import axios from "axios"
 
 const formSchema = z.object({
     username: z.string().email("Please enter a valid email address"),
@@ -32,7 +33,7 @@ export default function Login() {
     })
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
+        // axios.post()
     }
 
     return (
