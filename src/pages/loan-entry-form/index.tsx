@@ -1,12 +1,11 @@
-import { Cards } from "./cards";
-import { Header } from "./header";
 import {
     ResizableHandle,
     ResizablePanel,
     ResizablePanelGroup,
 } from "@/components/ui/resizable"
+import { LoanForm } from "./loan";
 
-export function Dashboard() {
+export function LoanEntryForm() {
     return (
         <ResizablePanelGroup
             direction="horizontal"
@@ -20,8 +19,7 @@ export function Dashboard() {
             <ResizableHandle withHandle />
             <ResizablePanel>
                 <div className="p-6">
-                        <Header />
-                        <Cards />
+                        <LoanForm />
                 </div>
             </ResizablePanel>
         </ResizablePanelGroup>
