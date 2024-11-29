@@ -1,6 +1,9 @@
 "use client"
 
-import { Badge } from '@/components/ui/badge';
+import BalanceIcon from '@/assets/icons/money-balance-icon.svg'
+import LoanIcon from '@/assets/icons/loan-icon.svg'
+import InterestIcon from '@/assets/icons/interest-rate-icon.svg'
+import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import {
     Card,
     CardContent,
@@ -88,51 +91,69 @@ export function Cards() {
         <div className="p-6 grid grid-cols-1 md:grid-cols-1 gap-6">
 
             {/* Overview Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <Card>
-                    <CardHeader>
-                        <h3 className="text-lg font-semibold">Total Loan Amount</h3>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold">₦5,400.00</div>
-                        <Badge variant="success">+16% this month</Badge>
-                    </CardContent>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                <Card className='flex items-center px-6 py-2 flex-wrap gap-4'>
+                    <Avatar className='w-14 h-14 bg-blue-200 justify-center items-center'>
+                        <AvatarImage src={LoanIcon} className='w-7/12' />
+                    </Avatar>
+
+                    <div>
+                        <CardHeader className='py-2 px-0'>
+                            <h3 className="text-base font-semibold text-gray-500">Total Loan Amount</h3>
+                        </CardHeader>
+                        <CardContent className='py-0 px-0'>
+                            <div className="text-2xl font-bold">N5,400.00</div>
+                            <p><span className='text-green-600 font-bold'>+16%</span> this month</p>
+                        </CardContent>
+                    </div>
                 </Card>
-                <Card>
-                    <CardHeader>
-                        <h3 className="text-lg font-semibold">Remaining Balance</h3>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold">₦1,800.00</div>
-                        <Badge variant="destructive">-1% this month</Badge>
-                    </CardContent>
+
+                <Card className='flex items-center px-6 py-2 flex-wrap gap-4'>
+                    <Avatar className='w-14 h-14 bg-blue-200 justify-center items-center'>
+                        <AvatarImage src={BalanceIcon} className='w-7/12' />
+                    </Avatar>
+
+                    <div>
+                        <CardHeader className='py-2 px-0'>
+                            <h3 className="text-base font-semibold text-gray-500">Remaining Balance</h3>
+                        </CardHeader>
+                        <CardContent className='py-0 px-0'>
+                            <div className="text-2xl font-bold">N5,400.00</div>
+                            <p><span className='text-red-600 font-bold'>+1%</span> this month</p>
+                        </CardContent>
+                    </div>
                 </Card>
-                <Card>
-                    <CardHeader>
-                        <h3 className="text-lg font-semibold">Interest Rate and Term</h3>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold">5%</div>
-                    </CardContent>
+
+                <Card className='flex items-center px-6 py-2 flex-wrap gap-4'>
+                    <Avatar className='w-14 h-14 bg-blue-200 justify-center items-center'>
+                        <AvatarImage src={InterestIcon} className='w-6/12' />
+                    </Avatar>
+
+                    <div>
+                        <CardHeader className='py-2 px-0'>
+                            <h3 className="text-base font-semibold text-gray-500">Interest Rate and Term</h3>
+                        </CardHeader>
+                        <CardContent className='py-0 px-0'>
+                            <div className="text-2xl font-bold">5%</div>
+                        </CardContent>
+                    </div>
                 </Card>
             </div>
 
-
-
             {/* Amortization Schedule */}
             <Card>
-                <CardHeader>
+                <CardHeader className='py-2'>
                     <h3 className="text-lg font-semibold flex justify-center">Amortization Schedule</h3>
                 </CardHeader>
 
                 {/* pie chart */}
-                <CardContent>
-                    <div className='flex flex-row'>
-                        <CardContent>
+                <CardContent className='py-2'>
+                    <div className='flex flex-row flex-wrap items-center justify-center'>
+                        <CardContent className='grow-[0.2]'>
                             <ChartContainer
                                 config={chartConfig}
                                 className="mx-auto aspect-square max-h-[250px]"
-                                style={{ width: '100%', height: '250px' }}
+                                style={{ width: '100%', height: '230px' }}
                             >
                                 <PieChart width={250} height={250}>
                                     <ChartTooltip
@@ -179,43 +200,42 @@ export function Cards() {
                                 </PieChart>
                             </ChartContainer>
                         </CardContent>
-                        <div className="flex items-center space-x-20">
+                        <div className="flex flex-wrap gap-6 grow basis-72 justify-between">
                             {/* other components */}
-                            <div>
-                                <div className='pb-10'>
+
+                            <div className='basis-[250px] flex gap-2'>
+                                <Separator orientation="vertical" className="h-full w-[6px] bg-blue-600 rounded-md" />
+                                <div className='flex flex-col'>
                                     <div className="text-sm">Principal</div>
-                                    <div className='flex items-center'>
-                                        <Separator orientation="vertical" className="h-7 w-1 bg-[#3981F7]" />
-                                        <div className="text-4xl font-bold ml-2">₦10,000.00</div>
-                                    </div>
+                                    <div className="text-2xl font-bold">N5,000.00</div>
                                 </div>
-
-                                <div>
-                                    <div className="text-sm">Interest</div>
-                                    <div className='flex items-center'>
-                                        <Separator orientation="vertical" className="h-7 w-1 bg-blue-200" />
-                                        <div className="text-4xl font-bold ml-2">₦5 for every ₦1000</div>
-                                    </div>
-                                </div>
-
                             </div>
 
-                            <div>
-                                <div className='pb-10'>
+                            <div className='basis-[250px] flex gap-2'>
+                                <Separator orientation="vertical" className="h-full w-[6px] bg-purple-300 rounded-md" />
+                                <div className='flex flex-col'>
                                     <div className="text-sm">Monthly Payment</div>
-                                    <div className='flex items-center'>
-                                        <Separator orientation="vertical" className="h-7 w-1 bg-purple-300" />
-                                        <div className="text-4xl font-bold ml-2">₦5,000.00</div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className="text-sm">Remaining Balance</div>
-                                    <div className='flex items-center'>
-                                        <Separator orientation="vertical" className="h-7 w-1 bg-[#000000]" />
-                                        <div className="text-4xl font-bold ml-2">₦2,000.00</div>
-                                    </div>
+                                    <div className="text-2xl font-bold">N5,000.00</div>
                                 </div>
                             </div>
+
+                            <div className='basis-[250px] flex gap-2'>
+                                <Separator orientation="vertical" className="h-full w-[6px] bg-cyan-400 rounded-md" />
+                                <div className='flex flex-col'>
+                                    <div className="text-sm">Interest</div>
+                                    <div className="text-2xl font-bold">N5 for every N1000</div>
+                                </div>
+                            </div>
+
+                            <div className='basis-[250px] flex gap-2'>
+                                <Separator orientation="vertical" className="h-full w-[6px] bg-blue-900 rounded-md" />
+                                <div className='flex flex-col'>
+                                    <div className="text-sm">Remaining Balance</div>
+                                    <div className="text-2xl font-bold">N1000</div>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
 
@@ -233,7 +253,7 @@ export function Cards() {
                     </CardHeader>
                     <CardContent>
                         <div className='flex justify-between'>
-                            <div className="text-4xl font-bold">₦15,000.00</div>
+                            <div className="text-4xl font-bold">N15,000.00</div>
                             <div className='flex flex-row pt-3'>
                                 <div className="text-sm text-[#008000]">+23% vs last month </div>
                                 <TrendingUp className="text-[#008000] h-4 w-4 pl-1" />
@@ -242,7 +262,7 @@ export function Cards() {
                     </CardContent>
 
 
-                    <Card>
+                    <Card className='border-0'>
                         <CardContent>
                             <ChartContainer config={linechartConfig}>
                                 <AreaChart
@@ -302,13 +322,12 @@ export function Cards() {
                         <h6 className="text-sm font-semibold text-destructive flex justify-center">From 1 - 31 March, 2022</h6>
                     </CardHeader>
                     <CardContent>
-                        <div className="flex justify-between items-center">
+                        <div className="flex justify-center items-center flex-wrap gap-4">
                             <div>
-
                                 <div className="text-sm">Total Loan</div>
                                 <div className='flex items-center'>
                                     <Separator orientation="vertical" className="h-7 w-1 bg-blue-200" />
-                                    <div className="text-lg font-bold ml-2">₦15,000.00</div>
+                                    <div className="text-lg font-bold ml-2">N15,000.00</div>
                                 </div>
                             </div>
                             <div>
@@ -316,25 +335,25 @@ export function Cards() {
                                 <div className="text-sm">Amount Due</div>
                                 <div className='flex items-center'>
                                     <Separator orientation="vertical" className="h-7 w-1 bg-purple-300" />
-                                    <div className="text-lg font-bold ml-2">₦7,500.00</div>
+                                    <div className="text-lg font-bold ml-2">N7,500.00</div>
                                 </div>
                             </div>
                             <div>
                                 <div className="text-sm">Paid</div>
                                 <div className='flex items-center'>
                                     <Separator orientation="vertical" className="h-7 w-1 bg-[#3981F7]" />
-                                    <div className="text-lg font-bold ml-2">₦7,500.00</div>
+                                    <div className="text-lg font-bold ml-2">N7,500.00</div>
                                 </div>
                             </div>
                         </div>
                     </CardContent>
 
 
-                    <Card className="flex flex-col">
-                        <CardContent className="flex flex-1 items-center pb-0">
+                    <Card className="flex flex-col border-0">
+                        <CardContent className="flex flex-1 items-center pb-0 border-0">
                             <ChartContainer
                                 config={semipiechartConfig}
-                                className="mx-auto aspect-square w-full max-w-[250px]"
+                                className="mx-auto aspect-square w-full max-w-[200px]"
                             >
                                 <RadialBarChart
                                     data={semipiechartData}
