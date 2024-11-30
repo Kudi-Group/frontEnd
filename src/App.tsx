@@ -1,7 +1,7 @@
 import './index.css'
 import Login from './auth/Login'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Dashboard } from './pages'
+import { Dashboard, LoanEntryForm } from './pages'
 
 function App() {
   return (
@@ -12,6 +12,10 @@ function App() {
 
       <Routes>
         <Route path="dashboard" element={<Dashboard />} />
+      </Routes>
+
+      <Routes>
+        <Route path="loan-form" element={<LoanEntryForm />} />
       </Routes>
     </BrowserRouter>
   )
