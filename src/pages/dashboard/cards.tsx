@@ -98,12 +98,12 @@ export function Cards() {
                     </Avatar>
 
                     <div>
-                        <CardHeader className='py-2 px-0'>
-                            <h3 className="text-base font-semibold text-gray-500">Total Loan Amount</h3>
+                        <CardHeader className='p-0'>
+                            <h3 className="text-base text-gray-500">Total Loan Amount</h3>
                         </CardHeader>
-                        <CardContent className='py-0 px-0'>
+                        <CardContent className='p-0'>
                             <div className="text-2xl font-bold">N5,400.00</div>
-                            <p><span className='text-green-600 font-bold'>+16%</span> this month</p>
+                            <p className='text-sm'><span className='text-green-600 font-bold'>+16%</span> this month</p>
                         </CardContent>
                     </div>
                 </Card>
@@ -114,12 +114,12 @@ export function Cards() {
                     </Avatar>
 
                     <div>
-                        <CardHeader className='py-2 px-0'>
-                            <h3 className="text-base font-semibold text-gray-500">Remaining Balance</h3>
+                        <CardHeader className='p-0'>
+                            <h3 className="text-base text-gray-500">Remaining Balance</h3>
                         </CardHeader>
-                        <CardContent className='py-0 px-0'>
+                        <CardContent className='p-0'>
                             <div className="text-2xl font-bold">N5,400.00</div>
-                            <p><span className='text-red-600 font-bold'>+1%</span> this month</p>
+                            <p className='text-sm'><span className='text-red-600 font-bold'>+1%</span> this month</p>
                         </CardContent>
                     </div>
                 </Card>
@@ -130,10 +130,10 @@ export function Cards() {
                     </Avatar>
 
                     <div>
-                        <CardHeader className='py-2 px-0'>
-                            <h3 className="text-base font-semibold text-gray-500">Interest Rate and Term</h3>
+                        <CardHeader className='p-0'>
+                            <h3 className="text-base text-gray-500">Interest Rate and Term</h3>
                         </CardHeader>
-                        <CardContent className='py-0 px-0'>
+                        <CardContent className='p-0'>
                             <div className="text-2xl font-bold">5%</div>
                         </CardContent>
                     </div>
@@ -143,7 +143,7 @@ export function Cards() {
             {/* Amortization Schedule */}
             <Card>
                 <CardHeader className='py-2'>
-                    <h3 className="text-lg font-semibold flex justify-center">Amortization Schedule</h3>
+                    <h3 className="text-lg text-blue-950 flex justify-center">Amortization Schedule</h3>
                 </CardHeader>
 
                 {/* pie chart */}
@@ -206,32 +206,32 @@ export function Cards() {
                             <div className='basis-[250px] flex gap-2'>
                                 <Separator orientation="vertical" className="h-full w-[6px] bg-blue-600 rounded-md" />
                                 <div className='flex flex-col'>
-                                    <div className="text-sm">Principal</div>
-                                    <div className="text-2xl font-bold">N5,000.00</div>
+                                    <div className="text-sm text-gray-500">Principal</div>
+                                    <div className="text-2xl ">N5,000.00</div>
                                 </div>
                             </div>
 
                             <div className='basis-[250px] flex gap-2'>
                                 <Separator orientation="vertical" className="h-full w-[6px] bg-purple-300 rounded-md" />
                                 <div className='flex flex-col'>
-                                    <div className="text-sm">Monthly Payment</div>
-                                    <div className="text-2xl font-bold">N5,000.00</div>
+                                    <div className="text-sm text-gray-500">Monthly Payment</div>
+                                    <div className="text-2xl">N5,000.00</div>
                                 </div>
                             </div>
 
                             <div className='basis-[250px] flex gap-2'>
                                 <Separator orientation="vertical" className="h-full w-[6px] bg-cyan-400 rounded-md" />
                                 <div className='flex flex-col'>
-                                    <div className="text-sm">Interest</div>
-                                    <div className="text-2xl font-bold">N5 for every N1000</div>
+                                    <div className="text-sm text-gray-500">Interest</div>
+                                    <div className="text-2xl">N5 for every N1000</div>
                                 </div>
                             </div>
 
                             <div className='basis-[250px] flex gap-2'>
                                 <Separator orientation="vertical" className="h-full w-[6px] bg-blue-900 rounded-md" />
                                 <div className='flex flex-col'>
-                                    <div className="text-sm">Remaining Balance</div>
-                                    <div className="text-2xl font-bold">N1000</div>
+                                    <div className="text-sm text-gray-500">Remaining Balance</div>
+                                    <div className="text-2xl">N1000</div>
                                 </div>
                             </div>
 
@@ -245,15 +245,15 @@ export function Cards() {
 
 
 
-            <div className="  grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="  grid grid-cols-1 lg:grid-cols-2 gap-4">
                 {/* Contribution Summary */}
                 <Card>
                     <CardHeader>
-                        <h3 className="text-lg font-semibold">Contribution Summary</h3>
+                        <h3 className="text-lg">Contribution Summary</h3>
                     </CardHeader>
                     <CardContent>
-                        <div className='flex justify-between'>
-                            <div className="text-4xl font-bold">N15,000.00</div>
+                        <div className='flex justify-between flex-wrap'>
+                            <div className="text-4xl">N15,000.00</div>
                             <div className='flex flex-row pt-3'>
                                 <div className="text-sm text-[#008000]">+23% vs last month </div>
                                 <TrendingUp className="text-[#008000] h-4 w-4 pl-1" />
@@ -318,13 +318,13 @@ export function Cards() {
                 {/* Upcoming Payments */}
                 <Card>
                     <CardHeader>
-                        <h3 className="text-lg font-semibold flex justify-center">Upcoming Payments</h3>
-                        <h6 className="text-sm font-semibold text-destructive flex justify-center">From 1 - 31 March, 2022</h6>
+                        <h3 className="text-lg flex justify-center">Upcoming Payments</h3>
+                        <h6 className="text-sm text-destructive flex justify-center">From 1 - 31 March, 2022</h6>
                     </CardHeader>
                     <CardContent>
                         <div className="flex justify-center items-center flex-wrap gap-4">
                             <div>
-                                <div className="text-sm">Total Loan</div>
+                                <div className="text-sm text-gray-500">Total Loan</div>
                                 <div className='flex items-center'>
                                     <Separator orientation="vertical" className="h-7 w-1 bg-blue-200" />
                                     <div className="text-lg font-bold ml-2">N15,000.00</div>
@@ -332,14 +332,14 @@ export function Cards() {
                             </div>
                             <div>
 
-                                <div className="text-sm">Amount Due</div>
+                                <div className="text-sm text-gray-500">Amount Due</div>
                                 <div className='flex items-center'>
                                     <Separator orientation="vertical" className="h-7 w-1 bg-purple-300" />
                                     <div className="text-lg font-bold ml-2">N7,500.00</div>
                                 </div>
                             </div>
                             <div>
-                                <div className="text-sm">Paid</div>
+                                <div className="text-sm text-gray-500">Paid</div>
                                 <div className='flex items-center'>
                                     <Separator orientation="vertical" className="h-7 w-1 bg-[#3981F7]" />
                                     <div className="text-lg font-bold ml-2">N7,500.00</div>
