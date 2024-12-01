@@ -1,5 +1,5 @@
 import { Cards } from "./cards";
-import { Header } from "./header";
+import { Header } from "../../components/header";
 
 
 export function Dashboard() {
