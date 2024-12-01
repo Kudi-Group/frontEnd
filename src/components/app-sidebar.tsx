@@ -1,4 +1,4 @@
-import { Calendar, Home, Inbox, Search, Settings, Box, BookText, MessageCircleQuestion, ChevronUp } from "lucide-react"
+import { Calendar, Home, Settings, Box, BookText, MessageCircleQuestion, ChevronUp } from "lucide-react"
 import Starfire from '@/assets/starfire.jpg'
 import {
     Sidebar,
@@ -28,12 +28,12 @@ const items = [
     },
     {
         title: "Loan Entry Form",
-        url: "#",
+        url: "/user/loan-form",
         icon: BookText,
     },
     {
         title: "Schedule",
-        url: "#",
+        url: "/user/schedule",
         icon: Calendar,
     },
     {
