@@ -1,5 +1,5 @@
 import { Bell } from "lucide-react";
-import { useUser } from "../../UserContext";
+import { useUser } from "@/UserContext";
 
 export function Header() {
   const { user } = useUser();
