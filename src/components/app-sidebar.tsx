@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/sidebar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu"
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
-
+import { useUser } from "../UserContext";
 // Menu items.
 const items = [
     {
@@ -28,7 +28,7 @@ const items = [
     },
     {
         title: "Loan Entry Form",
-        url: "#",
+        url: "/user/loan-form",
         icon: BookText,
     },
     {
@@ -49,6 +49,7 @@ const items = [
 ]
 
 export function AppSidebar() {
+    const {user} = useUser();
     return (
         <Sidebar>
             <SidebarContent>
@@ -79,7 +80,7 @@ export function AppSidebar() {
                                     <Avatar className=' w-8 h-8 bg-blue-200 justify-center items-center'>
                                         <AvatarImage src={Starfire} />
                                     </Avatar> 
-                                    Username
+                                    {user?.username}
                                     <ChevronUp className="ml-auto" />
                                 </SidebarMenuButton>
                             </DropdownMenuTrigger>

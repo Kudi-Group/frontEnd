@@ -17,8 +17,6 @@ import { Input } from "@/components/ui/input"
 import loginBg from "../assets/loginBg.png"
 import logo from "../assets/logo.png"
 import axios from "axios"
-import { useNavigate } from "react-router-dom"
-import { useUser } from "../UserContext"; // Import the context hook
 
 const formSchema = z.object({
     username: z.string().email("Please enter a valid email address"),
@@ -27,7 +25,7 @@ const formSchema = z.object({
 
 const baseUrl = `${import.meta.env.VITE_API_URL}`;
 
-export default function Login() {
+export default function SignUp() {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -36,29 +34,13 @@ export default function Login() {
         },
     })
 
-    // hook responsible for setting user data
-    const { setUser } = useUser();
-
-    const navigate = useNavigate();
-
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        // Initialize useNavigate
         try {
-            const response = await axios.post(`${baseUrl}/auth/login`, {
+            const response = await axios.post(`${baseUrl}/auth/signup`, {
                 username: values.username,
                 password: values.password,
             });
-
-            const userData = response.data; // Assuming the backend returns the userID
-            console.log("User logged in successfully:", userData);
-
-            // Store user data in localStorage
-            localStorage.setItem("user", JSON.stringify(userData));
-            // Update context with user data
-            setUser(userData);
-
-            // Navigate to /user
-            navigate("/user");
+            console.log("User created successfully:", response.data);
         } catch (error) {
             console.error("Error creating user:", error);
         }
@@ -76,7 +58,7 @@ export default function Login() {
                 <p>Simplifying Loans, Strengthening Growth</p>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 shrink flex flex-col items-center p-8 bg-[#DEF5F9] rounded-lg w-[min(400px,90%)]">
-                        <p className="font-bold">Login to your account</p>
+                        <p className="font-bold">Sign Up to your account</p>
                         <div className="w-full space-y-8 ">
                             <FormField
                                 control={form.control}
@@ -106,7 +88,7 @@ export default function Login() {
                                 )}
                             />
                         </div>
-                        <Button type="submit" className="w-full">Login</Button>
+                        <Button type="submit" className="w-full">Sign Up</Button>
                     </form>
                 </Form>
             </div>

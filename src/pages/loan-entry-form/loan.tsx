@@ -74,7 +74,7 @@ export function LoanForm() {
   }
 
   return (
-    <div className="mx-auto p-4 border rounded-lg shadow-md">
+    <div >
       <h1 className="text-xl font-semibold text-center mb-4">LOAN ENTRY FORM</h1>
 
       <Form {...form}>
