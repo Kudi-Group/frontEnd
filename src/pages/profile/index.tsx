@@ -57,7 +57,7 @@ export function Profile() {
             
             setTimeout(() => {
                 setFormEditable(false);
-            }, 2000);
+            }, 1000);
             console.log("User created successfully:", response.data);
         } catch (error) {
             console.error("Error creating user:", error);
@@ -92,7 +92,7 @@ export function Profile() {
                             </div>
                             <Button onClick={() => setTimeout(() => {
                                 setFormEditable(true);
-                            }, 2000)} className={formEditable ? "hidden" : "block"}>Edit</Button>
+                            }, 1000)} className={formEditable ? "hidden" : "block"}>Edit</Button>
                             <Button type="submit" className={formEditable ? "block" : "hidden"}>Save</Button>
 
                         </div>
@@ -133,13 +133,12 @@ export function Profile() {
                         <div className="flex flex-wrap gap-4">
 
                             <FormField
-                                disabled={!formEditable}
                                 control={form.control}
                                 name="gender"
                                 render={({ field }) => (
                                     <FormItem className="grow basis-48">
                                         <FormLabel>Gender</FormLabel>
-                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                        <Select onValueChange={field.onChange} defaultValue={field.value} disabled={!formEditable}>
                                             <FormControl className="w-full">
                                                 <SelectTrigger>
                                                     <SelectValue placeholder="Select your gender" />
