@@ -19,7 +19,7 @@ import logo from "../assets/logo.png"
 import axios from "axios"
 
 const formSchema = z.object({
-    username: z.string().email("Please enter a valid email address"),
+    username: z.string().min(5,"Username is required"),
     password: z.string().min(1, "Password is required")
 })
 

@@ -4,9 +4,9 @@ import React, { createContext, useContext, useState } from "react";
 interface User {
     id: string;
     username: string;
-    // Add other properties as needed
-}
-
+    loans: string[];
+  }
+  
 interface UserContextType {
     user: User | null;
     setUser: React.Dispatch<React.SetStateAction<User | null>>;

@@ -21,7 +21,7 @@ import { useNavigate } from "react-router-dom"
 import { useUser } from "../UserContext"; // Import the context hook
 
 const formSchema = z.object({
-    username: z.string().email("Please enter a valid email address"),
+    username: z.string().min(5,"Username is required"),
     password: z.string().min(1, "Password is required")
 })
 

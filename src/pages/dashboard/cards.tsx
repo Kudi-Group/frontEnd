@@ -20,9 +20,51 @@ import { TrendingUp } from "lucide-react"
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
 import { Label, Pie, PieChart, PolarRadiusAxis, RadialBar, RadialBarChart } from "recharts"
 import { Separator } from '@/components/ui/separator';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useUser } from "@/UserContext";
 
 
+interface Loan {
+    id: number;
+    date: string;
+    loanAmount: number;
+    Years: number;
+    interestRate: number;
+    userId: number;
+}
 
+interface AmortizationPayment {
+    principal: number;
+    monthlyPayment: number;
+    startDate: string;
+    endDate: string;
+    totalAmountPaid: number;
+    totalNumberOfPayments: number;
+    paymentLog: PaymentLog[];
+}
+
+interface PaymentLog {
+    previousLoanAmount: number;
+    date: string;
+    amountPaid: number;
+    loanAmount: number;
+    interestOwed: number;
+    interest: number;
+}
+
+interface FilteredPayment {
+    id: string;
+    dueDate: string;
+    amount: string;
+    interest: string;
+    principal: string;
+    remainingBalance: string;
+}
+
+interface UserLoansResponse {
+    loans: Loan[];
+}
 
 const linechartData = [
     { month: "January", desktop: 186 },
@@ -44,6 +86,7 @@ const linechartConfig = {
 const chartData = [
     { browser: "safari", visitors: 200, fill: "#C3B5FD" },
     { browser: "chrome", visitors: 600, fill: "#3981F7" },
+    { browser: "firefox", visitors: 200, fill: "#000000" },
     { browser: "firefox", visitors: 200, fill: "#000000" },
 ]
 
@@ -78,7 +121,13 @@ const semipiechartConfig = {
     },
 } satisfies ChartConfig
 
+
+
+const baseUrl = `${import.meta.env.VITE_API_URL}`;
+
 export function Cards() {
+
+
     const totalVisitorsPie = React.useMemo(() => {
         return chartData.reduce((acc, curr) => acc + curr.visitors, 0)
     }, [])
@@ -86,6 +135,75 @@ export function Cards() {
     const totalVisitorsSemiPie = React.useMemo(() => {
         return chartData.reduce((acc, curr) => acc + curr.visitors, 0)
     }, [])
+
+    const { user } = useUser(); // Use user from context
+    const [loans, setLoans] = useState<Loan[]>([]);
+    const [amortizationData, setAmortizationData] = useState<FilteredPayment[]>([]);
+
+
+    useEffect(() => {
+        const getLoans = async () => {
+            try {
+                const res = await axios.get<UserLoansResponse>(`${baseUrl}/user/${user?.id}`);
+                setLoans(res.data.loans);
+            } catch (error) {
+                console.error("Error fetching loan details:", error);
+            }
+        };
+
+        if (user?.id) {
+            getLoans();
+        }
+    }, [user?.id]);
+
+
+    // Fetch amortization data for the first loan and filter by current month
+    useEffect(() => {
+        const fetchAmortizationData = async (loanId: number) => {
+            try {
+                const res = await axios.post<AmortizationPayment>(
+                    `${baseUrl}/loans/amortizationPaymentPlan/${loanId}`
+                );
+
+                const { paymentLog } = res.data;
+                console.log(paymentLog)
+
+                // // Get the current month and year
+                // const currentMonth = new Date().getMonth();
+                // const currentYear = new Date().getFullYear();
+
+                // // // Filter the paymentLog for the current month
+                // // const filteredLog = paymentLog.filter((log) => {
+                // //   const logDate = new Date(log.date);
+                // //   return (
+                // //     logDate.getMonth() === currentMonth && logDate.getFullYear() === currentYear
+                // //   );
+                // // });
+
+                // // Format filtered log data for the table
+                const formattedData = paymentLog.map((log, index) => ({
+                    id: index.toString(),
+                    dueDate: new Date(log.date).toLocaleDateString("en-GB"), // Format as dd-MM-yyyy
+                    amount: log.amountPaid.toFixed(2),
+                    interest: log.interest.toFixed(2),
+                    principal: (log.amountPaid - log.interest).toFixed(2),
+                    remainingBalance: log.loanAmount.toFixed(2),
+                }));
+
+                setAmortizationData(formattedData);
+            } catch (error) {
+                console.error("Error fetching amortization data:", error);
+            }
+        };
+
+        const firstLoan = loans[0]; // Access the first loan
+        if (firstLoan) {
+            fetchAmortizationData(firstLoan.id);
+        }
+    }, [loans]);
+
+    const firstLoan = loans[0]; // Access the first loan
+    const amortizationInfo = amortizationData[0];
 
     return (
         <div className="py-6 grid grid-cols-1 md:grid-cols-1 gap-6">
@@ -102,7 +220,7 @@ export function Cards() {
                             <h3 className="text-base text-gray-500">Total Loan Amount</h3>
                         </CardHeader>
                         <CardContent className='p-0'>
-                            <div className="text-2xl font-bold">N5,400.00</div>
+                            <div className="text-2xl font-bold">N {firstLoan ? firstLoan.loanAmount : "No loans available"}</div>
                             <p className='text-sm'><span className='text-green-600 font-bold'>+16%</span> this month</p>
                         </CardContent>
                     </div>
@@ -118,7 +236,7 @@ export function Cards() {
                             <h3 className="text-base text-gray-500">Remaining Balance</h3>
                         </CardHeader>
                         <CardContent className='p-0'>
-                            <div className="text-2xl font-bold">N5,400.00</div>
+                            <div className="text-2xl font-bold">N {amortizationInfo?.remainingBalance}</div>
                             <p className='text-sm'><span className='text-red-600 font-bold'>+1%</span> this month</p>
                         </CardContent>
                     </div>
@@ -134,7 +252,7 @@ export function Cards() {
                             <h3 className="text-base text-gray-500">Interest Rate and Term</h3>
                         </CardHeader>
                         <CardContent className='p-0'>
-                            <div className="text-2xl font-bold">5%</div>
+                            <div className="text-2xl font-bold">{firstLoan ? firstLoan.interestRate : "No interest rate available"}%</div>
                         </CardContent>
                     </div>
                 </Card>
@@ -207,7 +325,7 @@ export function Cards() {
                                 <Separator orientation="vertical" className="h-full w-[6px] bg-blue-600 rounded-md" />
                                 <div className='flex flex-col'>
                                     <div className="text-sm text-gray-500">Principal</div>
-                                    <div className="text-2xl ">N5,000.00</div>
+                                    <div className="text-2xl ">N {amortizationInfo?.principal}</div>
                                 </div>
                             </div>
 
@@ -215,7 +333,7 @@ export function Cards() {
                                 <Separator orientation="vertical" className="h-full w-[6px] bg-purple-300 rounded-md" />
                                 <div className='flex flex-col'>
                                     <div className="text-sm text-gray-500">Monthly Payment</div>
-                                    <div className="text-2xl">N5,000.00</div>
+                                    <div className="text-2xl">N {amortizationInfo?.amount}</div>
                                 </div>
                             </div>
 
@@ -223,7 +341,7 @@ export function Cards() {
                                 <Separator orientation="vertical" className="h-full w-[6px] bg-cyan-400 rounded-md" />
                                 <div className='flex flex-col'>
                                     <div className="text-sm text-gray-500">Interest</div>
-                                    <div className="text-2xl">N5 for every N1000</div>
+                                    <div className="text-2xl">N {amortizationInfo?.interest}</div>
                                 </div>
                             </div>
 
@@ -231,7 +349,7 @@ export function Cards() {
                                 <Separator orientation="vertical" className="h-full w-[6px] bg-blue-900 rounded-md" />
                                 <div className='flex flex-col'>
                                     <div className="text-sm text-gray-500">Remaining Balance</div>
-                                    <div className="text-2xl">N1000</div>
+                                    <div className="text-2xl">N {amortizationInfo?.remainingBalance}</div>
                                 </div>
                             </div>
 
