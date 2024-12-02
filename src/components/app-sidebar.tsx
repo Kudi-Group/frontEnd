@@ -43,7 +43,7 @@ const items = [
     },
     {
         title: "Settings",
-        url: "#",
+        url: "/user/profile",
         icon: Settings,
     },
 ]
