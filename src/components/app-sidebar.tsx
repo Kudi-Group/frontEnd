@@ -1,4 +1,4 @@
-import { Calendar, Home, Inbox, Search, Settings, Box, BookText, MessageCircleQuestion, ChevronUp } from "lucide-react"
+import { Calendar, Home, Settings, Box, BookText, MessageCircleQuestion, ChevronUp } from "lucide-react"
 import Starfire from '@/assets/starfire.jpg'
 import {
     Sidebar,
@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/sidebar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu"
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
-
+import { useUser } from "../UserContext";
 // Menu items.
 const items = [
     {
@@ -28,12 +28,12 @@ const items = [
     },
     {
         title: "Loan Entry Form",
-        url: "#",
+        url: "/user/loan-form",
         icon: BookText,
     },
     {
         title: "Schedule",
-        url: "#",
+        url: "/user/schedule",
         icon: Calendar,
     },
     {
@@ -43,12 +43,13 @@ const items = [
     },
     {
         title: "Settings",
-        url: "#",
+        url: "/user/profile",
         icon: Settings,
     },
 ]
 
 export function AppSidebar() {
+    const {user} = useUser();
     return (
         <Sidebar>
             <SidebarContent>
@@ -79,7 +80,7 @@ export function AppSidebar() {
                                     <Avatar className=' w-8 h-8 bg-blue-200 justify-center items-center'>
                                         <AvatarImage src={Starfire} />
                                     </Avatar> 
-                                    Username
+                                    {user?.username}
                                     <ChevronUp className="ml-auto" />
                                 </SidebarMenuButton>
                             </DropdownMenuTrigger>

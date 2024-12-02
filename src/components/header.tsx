@@ -1,10 +1,13 @@
 import { Bell } from "lucide-react";
+import { useUser } from "@/UserContext";
 
 export function Header() {
+  const { user } = useUser();
+
   return (
     <div className="flex justify-between items-center bg-gray-50 px-8 py-2 rounded-lg shadow-sm">
       <div className="flex items-center space-x-2">
-        <h1 className="text-xl font-semibold">Hello Mira</h1>
+        <h1 className="text-xl font-semibold">Hello {user?.username}</h1>
         <span role="img" aria-label="wave">
           👋
         </span>
