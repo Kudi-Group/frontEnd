@@ -58,7 +58,7 @@ export default function Login() {
             setUser(userData);
 
             // Navigate to /user
-            navigate("/user");
+            navigate("/user/dashboard");
         } catch (error) {
             console.error("Error creating user:", error);
         }

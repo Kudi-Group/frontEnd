@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input"
 import loginBg from "../assets/loginBg.png"
 import logo from "../assets/logo.png"
 import axios from "axios"
+import { useNavigate } from 'react-router-dom';
 
 const formSchema = z.object({
     username: z.string().min(5,"Username is required"),
@@ -26,6 +27,9 @@ const formSchema = z.object({
 const baseUrl = `${import.meta.env.VITE_API_URL}`;
 
 export default function SignUp() {
+
+    const navigate = useNavigate();
+    
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -41,6 +45,7 @@ export default function SignUp() {
                 password: values.password,
             });
             console.log("User created successfully:", response.data);
+            navigate('/login')
         } catch (error) {
             console.error("Error creating user:", error);
         }

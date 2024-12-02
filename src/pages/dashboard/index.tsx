@@ -1,4 +1,3 @@
-import { UserProvider } from "@/UserContext";
 import { Cards } from "./cards";
 import { Header } from "@/components/header";
 

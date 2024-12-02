@@ -171,8 +171,8 @@ export function SchedulePage() {
         console.log(paymentLog)
 
         // Get the current month and year
-        const currentMonth = new Date().getMonth();
-        const currentYear = new Date().getFullYear();
+        // const currentMonth = new Date().getMonth();
+        // const currentYear = new Date().getFullYear();
 
         // // Filter the paymentLog for the current month
         // const filteredLog = paymentLog.filter((log) => {
